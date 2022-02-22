@@ -10,6 +10,8 @@ def create_company(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM companyName")
         tableContain = cur.fetchall()
+        conn.commit()
+        conn.close()
         print(tableContain)
         return Response(data={'data': tableContain})
     else:
@@ -31,6 +33,8 @@ def get_company(request, company_id):
         cur = conn.cursor()
         cur.execute("SELECT * FROM companyName WHERE CompanyID = (?)", company_id)
         tableContain = cur.fetchone()
+        conn.commit()
+        conn.close()
         # print(tableContain)
         if tableContain is None:
             return Response(data={"data": "content does not exist"})
@@ -83,6 +87,8 @@ def create_companyProblem(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM companyProblem")
         tableContain = cur.fetchall()
+        conn.commit()
+        conn.close()
         # print(tableContain)
         return Response(data={'data': tableContain})
     else:
@@ -104,6 +110,8 @@ def get_companyProblem(request, id):
         cur = conn.cursor()
         cur.execute("SELECT * FROM companyProblem WHERE ID = (?)", id)
         tableContain = cur.fetchone()
+        conn.commit()
+        conn.close()
         print(tableContain)
         if tableContain is None:
             return Response(data={"data": "content does not exist"})

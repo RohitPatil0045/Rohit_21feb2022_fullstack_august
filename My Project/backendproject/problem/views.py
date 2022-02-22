@@ -7,15 +7,17 @@ import sqlite3
 @api_view(['GET', 'POST'])
 def create_topic(request):
     if request.method == "GET":
-        conn = sqlite3.connect('user.db')
+        conn = sqlite3.connect('user.db', timeout=2)
         cur = conn.cursor()
         cur.execute("SELECT * FROM topic")
         tableContain = cur.fetchall()
+        conn.commit()
+        conn.close()
         print(tableContain)
         return Response(data={'data': tableContain})
     else:
         req_data = request.data
-        conn = sqlite3.connect('user.db')
+        conn = sqlite3.connect('user.db', timeout=2)
         cur = conn.cursor()
         toArray = [req_data['TopicID'], req_data['TopicName']]
         cur.execute("INSERT INTO topic VALUES (?,?)", toArray)
@@ -31,6 +33,8 @@ def get_topic(request, topic_id):
         cur = conn.cursor()
         cur.execute("SELECT * FROM topic WHERE TopicID = (?)", topic_id)
         tableContain = cur.fetchone()
+        conn.commit()
+        conn.close()
         # print(tableContain)
         if tableContain is None:
             return Response(data={"data": "content does not exist"})
@@ -84,6 +88,8 @@ def create_difficultylevel(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM difficultyLevel")
         tableContain = cur.fetchall()
+        conn.commit()
+        conn.close()
         print(tableContain)
         return Response(data={'data': tableContain})
     else:
@@ -104,6 +110,8 @@ def get_difficultylevel(request, diff_id):
         cur = conn.cursor()
         cur.execute("SELECT * FROM difficultyLevel WHERE DiffID = (?)", diff_id)
         tableContain = cur.fetchone()
+        conn.commit()
+        conn.close()
         # print(tableContain)
         if tableContain is None:
             return Response(data={"data": "content does not exist"})
@@ -158,6 +166,8 @@ def create_problem(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM problem")
         tableContain = cur.fetchall()
+        conn.commit()
+        conn.close()
         print(tableContain)
         return Response(data={'data': tableContain})
     else:
@@ -179,6 +189,8 @@ def get_problem(request, problem_id):
         cur = conn.cursor()
         cur.execute("SELECT * FROM problem WHERE ProblemID = (?)", problem_id)
         tableContain = cur.fetchone()
+        conn.commit()
+        conn.close()
         # print(tableContain)
         if tableContain is None:
             return Response(data={"data": "content does not exist"})

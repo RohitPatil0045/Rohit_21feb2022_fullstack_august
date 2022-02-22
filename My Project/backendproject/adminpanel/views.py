@@ -10,6 +10,8 @@ def user_create(request):
         cur = conn.cursor()
         cur.execute("SELECT * FROM userLogin")
         tableContain = cur.fetchall()
+        conn.commit()
+        conn.close()
         print(tableContain)
         return Response(data={'data': tableContain})
     else:
