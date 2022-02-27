@@ -83,10 +83,3 @@ function Topic() {
 }
 
 export default Topic;
-
-// a = [
-//     [a,h],
-//     [d],
-//     [d],
-//     [f]
-// ]

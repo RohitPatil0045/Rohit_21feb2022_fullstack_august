@@ -112,10 +112,10 @@
 # print (c)
 
 
-s = "babad"
-
-for i in range(len(s)):
-    if s[i] ==
+# s = "babad"
+#
+# for i in range(len(s)):
+#     if s[i] ==
 
 
 
